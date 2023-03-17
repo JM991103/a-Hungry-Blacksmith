@@ -5,19 +5,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item Data", menuName = "ScriptableObject/ItemData", order = 0)]
 public class ItemData : ScriptableObject
 {
-    [Header("╬фюлеш ╠Б╨╩ ╣╔юлем")]
+    [Header("Л∙└Л²╢М┘° Й╦╟КЁ╦ К█╟Л²╢М└╟")]
     public int itemID;
     public string itemName;
     public GameObject itemPrefab;
     public Sprite itemIcon;
-    [Header("╬фюлеш ╠╦╦е ╨Я©К")]
+    [Header("Л∙└Л²╢М┘° Й╣╛К╖╓ К╧└Л ╘")]
     public int buyValue;
-    [Header("╬фюлеш фг╦е ╨Яю╡")]
+    [Header("Л∙└Л²╢М┘° М▄░К╖╓ К╧└Л°╗")]
     [Range(0f, 1f)]
     public float saleValue;
     public int SaleValue
     {
-        get => (int)(buyValue * saleValue);       // ╧╚а╤╟г╪р╪Жа║ юъ╤СЁ©
+        get => (int)(buyValue * saleValue);       // К╛╢Л║╟Й╠╢Л├▄Л┬≤Л═░ Л·≤К²╪К┐└
     }
 
 }
