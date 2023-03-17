@@ -14,10 +14,10 @@ public class ItemData : ScriptableObject
     public int buyValue;
     [Header("아이템 판매 비율")]
     [Range(0f, 1f)]
-    public float saleValue;
+    public float saleRatio;
     public int SaleValue
     {
-        get => (int)(buyValue * saleValue);       // 무조건소수점 잘라냄
+        get => (int)(buyValue * saleRatio);       // 무조건소수점 잘라냄
     }
 
 }
