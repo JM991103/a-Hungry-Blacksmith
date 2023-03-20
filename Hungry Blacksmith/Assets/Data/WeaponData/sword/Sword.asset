@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f28f743c46ca6e448ab1484ae523eda, type: 3}
-  m_Name: TestWeaponData
+  m_Script: {fileID: 11500000, guid: c799a834e8fab204fb6427604345463f, type: 3}
+  m_Name: Sword
   m_EditorClassIdentifier: 
-  itemID: 0
-  itemName: 
-  itemPrefab: {fileID: 0}
-  itemIcon: {fileID: 0}
-  saleValue: 0
-  costMoneyValue: 0
-  costData: []
-  enforceRatio: 0
-  destroy: 0
-  changeWeaponData:
+  WeaponDatas:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
