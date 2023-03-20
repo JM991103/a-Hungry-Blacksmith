@@ -21,4 +21,6 @@ MonoBehaviour:
   costData: []
   enforceRatio: 0
   destroy: 0
-  changeWeaponData: []
+  changeWeaponData:
+  - {fileID: 0}
+  - {fileID: 0}

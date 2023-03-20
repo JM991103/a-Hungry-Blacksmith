@@ -18,13 +18,23 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        if (item != null)
-        {
-            itemIcon.sprite = item.itemIcon;
-        }
-        else
-        {
-            itemIcon.sprite = weapon.itemIcon;
-        }
+        //if (item != null)
+        //{
+        //    itemIcon.sprite = item.itemIcon;
+        //}
+        //else
+        //{
+        //    itemIcon.sprite = weapon.itemIcon;
+        //}
+
+        Test();
+    }
+
+    void Test()
+    {
+        WeaponItemManager weaponItem = GameManager.Inst.WeaponManager;
+        TotalWeapon wp = weaponItem.weaponItems[0];
+
+        int a = 0;
     }
 }
