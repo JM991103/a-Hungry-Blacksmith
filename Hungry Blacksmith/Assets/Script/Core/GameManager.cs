@@ -19,13 +19,21 @@ public class GameManager : Singleton<GameManager>
         ui = FindObjectOfType<UI>();
         weaponManager = GetComponent<WeaponItemManager>();
         weapons = new Weapon[3];
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            GameObject obj = new GameObject();
+            obj.transform.parent = transform;
+            obj.name = $"Weapon({i})";
+            obj.AddComponent<Weapon>();
+            weapons[i] = obj.GetComponent<Weapon>();
+        }
     }
 
     public void WeaponSave(Weapon waepon, int count)
     {
         if(weapons != null)
         {
-            weapons[count] = waepon;
+            weapons[count].EnganceRange = waepon.EnganceRange;
         }
     }
 }

@@ -24,6 +24,7 @@ public class Weapon : MonoBehaviour
                 {
                     enganceRange = value;
                     gameObject.name = $"{WeaponModel.name}";
+                    if(weaponImage != null)
                     weaponImage.sprite = WeaponModel.itemIcon;
                 }
             }

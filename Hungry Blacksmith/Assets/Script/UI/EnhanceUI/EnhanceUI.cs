@@ -43,7 +43,7 @@ public class EnhanceUI : MonoBehaviour
             // 세이브 본이 있을 때
             for (int i = 0; i < slots.Length; i++)
             {
-                slots[i].weapon = gameManager.Weapons[i];
+                slots[i].weapon.EnganceRange = gameManager.Weapons[i].EnganceRange;
             }
         }
         else
