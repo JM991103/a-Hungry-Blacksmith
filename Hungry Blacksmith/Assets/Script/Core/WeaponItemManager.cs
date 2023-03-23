@@ -9,4 +9,5 @@ public class WeaponItemManager : MonoBehaviour
     public TotalWeapon this[int id] => weaponItems[id];
 
     public TotalWeapon this[WeaponEnum code] => weaponItems[(int)code];
+
 }

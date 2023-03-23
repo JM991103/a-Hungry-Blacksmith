@@ -39,10 +39,12 @@ public class WeaponData : ScriptableObject
     public float destroy;
 
     [Header("하락 및 성공시 바뀔 아이템 (0은 하락, 1은 성공)")]
-    public WeaponItemManager[] changeWeaponData;       // 하락 및 강화성공 후 나올아이템 
+    public WeaponData[] changeWeaponData;       // 하락 및 강화성공 후 나올아이템 
 
     public float DropRatio
     {
         get => 1 - enforceRatio + destroy;
     }
+
+    public float DestroyRatio => enforceRatio + destroy;
 }

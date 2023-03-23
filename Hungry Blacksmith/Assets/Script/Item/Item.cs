@@ -34,7 +34,5 @@ public class Item : MonoBehaviour
     {
         WeaponItemManager weaponItem = GameManager.Inst.WeaponManager;
         TotalWeapon wp = weaponItem.weaponItems[0];
-
-        int a = 0;
     }
 }
