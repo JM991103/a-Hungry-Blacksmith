@@ -71,6 +71,9 @@ public class UI : MonoBehaviour
     /// </summary>
     int day = 1;
 
+    /// <summary>
+    /// HP 프로퍼티
+    /// </summary>
     public int HP
     {
         get => hp;
@@ -92,6 +95,9 @@ public class UI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gold 프로퍼티
+    /// </summary>
     public int Gold
     {
         get => gold;
@@ -105,6 +111,9 @@ public class UI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 명성치 프로퍼티
+    /// </summary>
     public int Fame
     {
         get => fame;
@@ -118,6 +127,9 @@ public class UI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 날짜 프로퍼티
+    /// </summary>
     public int Day
     {
         get => day;
@@ -131,6 +143,9 @@ public class UI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 날짜 텍스트의 부모의 트랜스폼을 반환하는 프로퍼티
+    /// </summary>
     public Transform DayTextParent => dayText.transform.parent.GetComponent<Transform>();
 
     private void Awake()
@@ -158,6 +173,9 @@ public class UI : MonoBehaviour
         nextDayText.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 다음날로 넘어가는 함수
+    /// </summary>
     void NextDay()
     {
         nextDayText.gameObject.SetActive(true);
@@ -167,6 +185,10 @@ public class UI : MonoBehaviour
         nextDayButton.gameObject.SetActive(false);        
     }
 
+    /// <summary>
+    /// 다음날 버튼을 누르면 화면이 어두워졌다가 밝아지는 함수
+    /// </summary>
+    /// <returns></returns>
     IEnumerator FadeInOut()
     {
         for (float i = 0.0f; i <= 1.0f;)
