@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    WeaponItemManager weaponManager;
+    UI ui;
 
-    public WeaponItemManager WeaponManager => weaponManager;
+    public UI UI => ui;
 
     protected override void Initialize()
     {
         base.Initialize();
-        weaponManager = GetComponent<WeaponItemManager>();
+        ui = FindObjectOfType<UI>();
     }
 }
