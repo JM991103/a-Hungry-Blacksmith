@@ -19,7 +19,7 @@ MonoBehaviour:
   saleValue: 0
   costMoneyValue: 0
   costData: []
-  enforceRatio: 0.7
+  enforceRatio: 1
   destroy: 0
   changeWeaponData:
   - {fileID: 0}
