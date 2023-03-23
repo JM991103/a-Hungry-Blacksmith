@@ -24,6 +24,7 @@ public class Weapon : MonoBehaviour
                 {
                     enganceRange = value;
                     gameObject.name = $"{WeaponModel.name}";
+                    if(weaponImage != null)
                     weaponImage.sprite = WeaponModel.itemIcon;
                 }
             }
@@ -38,7 +39,11 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         model = GameManager.Inst.WeaponManager.weaponItems[0];
-        Rest();
+        
+        if(enganceRange == int.MinValue)
+        {
+            Rest();
+        }
     }
 
     public void Rest()
@@ -51,31 +56,36 @@ public class Weapon : MonoBehaviour
     {
         if (model.WeaponDatas.Length - 1 > enganceRange)
         {
-            float rand = UnityEngine.Random.Range(0.0f, 1.0f);
-            if (WeaponModel.enforceRatio > rand)
+            // 최고 단계인지 검사
+            if (MaterialInspection())
             {
-                // 강화 성공
-                EnhanceSuccess();
-                Debug.Log($"강화 성공! 현재 강화 단계 : {EnganceRange}");
-            }
-            else if (!(WeaponModel.destroy <= 0.0f) && WeaponModel.DestroyRatio > rand)
-            {
-                // 파괴
-                EnganceDestroy();
-                Debug.Log($"무기가 파괴 되어 0강으로 돌아갑니다. 현재 강화 단계 : {EnganceRange}");
-            }
-            else
-            {
-                // 강화 실패 (하락)
-                if (EnganceRange != 0)
+                // 재료가 충분한지 검사
+                float rand = UnityEngine.Random.Range(0.0f, 1.0f);
+                if (WeaponModel.enforceRatio > rand)
                 {
-                    EnhanceFail();
-                    Debug.Log($"강화 실패! 현재 강화 단계 : {EnganceRange}");
+                    // 강화 성공
+                    EnhanceSuccess();
+                    Debug.Log($"강화 성공! 현재 강화 단계 : {EnganceRange}");
+                }
+                else if (!(WeaponModel.destroy <= 0.0f) && WeaponModel.DestroyRatio > rand)
+                {
+                    // 파괴
+                    EnganceDestroy();
+                    Debug.Log($"무기가 파괴 되어 0강으로 돌아갑니다. 현재 강화 단계 : {EnganceRange}");
                 }
                 else
                 {
-                    Debug.Log($"최하 단계이므로 하락 하지않습니다. : {enganceRange}");
-                }
+                    // 강화 실패 (하락)
+                    if (EnganceRange != 0)
+                    {
+                        EnhanceFail();
+                        Debug.Log($"강화 실패! 현재 강화 단계 : {EnganceRange}");
+                    }
+                    else
+                    {
+                        Debug.Log($"최하 단계이므로 하락 하지않습니다. : {enganceRange}");
+                    }
+                } 
             }
         }
         else
@@ -97,5 +107,22 @@ public class Weapon : MonoBehaviour
     void EnganceDestroy()
     {
         EnganceRange = 0;
+    }
+
+    bool MaterialInspection()
+    {
+        bool result = false;
+
+        if (WeaponModel.costData.Length != 0)
+        {
+            // 강화 재료가 하나라도 필요하면
+
+        }
+        else
+        {
+            result = true; // 강화 재료가 필요가 없다.
+        }
+
+        return result;
     }
 }

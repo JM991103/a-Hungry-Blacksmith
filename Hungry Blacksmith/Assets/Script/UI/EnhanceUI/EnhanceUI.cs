@@ -35,6 +35,27 @@ public class EnhanceUI : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        GameManager gameManager = GameManager.Inst;
+        if (gameManager.Weapons[0] != null && gameManager.Weapons[1] != null && gameManager.Weapons[2] != null)
+        {
+            // 세이브 본이 있을 때
+            for (int i = 0; i < slots.Length; i++)
+            {
+                slots[i].weapon.EnganceRange = gameManager.Weapons[i].EnganceRange;
+            }
+        }
+        else
+        {
+            // 세이브 본이 없을 때
+            for (int i = 0; i < slots.Length; i++)
+            {
+                slots[i].weapon.Rest();
+            }
+        }
+    }
+
     /// <summary>
     /// 강화안내문구 함수. (강화 상세정보 출력 및 할지 말지 선택)
     /// </summary>
@@ -43,6 +64,13 @@ public class EnhanceUI : MonoBehaviour
         if (selectSlot != null)
         {
             selectSlot.weapon.Enhance();        // 지금은 누르면 바로 강화 추후 상의 후 결정
+
+            GameManager gameManager = GameManager.Inst;
+
+            for (int i = 0; i < slots.Length; i++)
+            {
+                gameManager.WeaponSave(slots[i].weapon, i);
+            }
 
         }
     }

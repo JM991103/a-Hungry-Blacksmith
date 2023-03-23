@@ -10,7 +10,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public Action<Slot> selectWeaponSlot;
     public Weapon weapon;
 
-
     private void Awake()
     {
         weapon = GetComponentInChildren<Weapon>();

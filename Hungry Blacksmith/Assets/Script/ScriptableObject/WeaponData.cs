@@ -10,7 +10,7 @@ public class WeaponData : ScriptableObject
     [Serializable]
     public struct CostData
     {
-        public ItemData costItem;       // 소비할 아이템
+        public ItemEnum costItem;       // 소비할 아이템
         public int costItemValue;       // 아이템의 갯수
     }
 
