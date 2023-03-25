@@ -15,7 +15,7 @@ public enum WeaponEnum
 /// </summary>
 public enum ItemEnum
 {
-    Sowrd_0 = 0,
+    Rube = 0,
     Sowrd_1,
     Sowrd_2,
     Sowrd_3,
@@ -25,5 +25,6 @@ public enum ItemEnum
     Sowrd_7,
     Sowrd_8,
     Sowrd_9,
-    Sowrd_10
+    Sowrd_10,
+    NULL
 }

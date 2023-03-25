@@ -5,34 +5,28 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    [Header("둘중의 하나만 선택")]
-    public ItemData item;
-    public WeaponData weapon;
+    public int itemCount = 0;
 
-    SpriteRenderer itemIcon;
+    bool isSetting = false;
 
-    private void Awake()
+    ItemEnum itemType;
+
+
+    public ItemEnum ItemType
     {
-        itemIcon = GetComponent<SpriteRenderer>();
+        get => itemType;
+        set
+        {
+            if (isSetting)
+            {
+                isSetting = true;
+                itemType = value;
+            }
+        }
     }
 
     private void Start()
     {
-        //if (item != null)
-        //{
-        //    itemIcon.sprite = item.itemIcon;
-        //}
-        //else
-        //{
-        //    itemIcon.sprite = weapon.itemIcon;
-        //}
-
-        Test();
-    }
-
-    void Test()
-    {
-        WeaponItemManager weaponItem = GameManager.Inst.WeaponManager;
-        TotalWeapon wp = weaponItem.weaponItems[0];
+        itemCount = 0;
     }
 }
