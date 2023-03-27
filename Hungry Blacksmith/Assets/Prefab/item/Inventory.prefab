@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab378f7ae798a54e9e5ea6f1f3ee6e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemdData:
+  itemData:
   - {fileID: 11400000, guid: 88311f6a3a6bd564c8ea468e7c0429ab, type: 2}
   - {fileID: 11400000, guid: 9f7ef81850eeb0b469c9b8c55692c625, type: 2}
   inventory: []

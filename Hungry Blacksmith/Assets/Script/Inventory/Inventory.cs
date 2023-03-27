@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Inventory : Singleton<Inventory>
 {
-    public ItemData[] itemdData;        // 총 아이템 데이터
+    public ItemData[] itemData;        // 총 아이템 데이터
 
     public Item[] inventory;
     ItemEnum selectItem = ItemEnum.NULL;
     protected override void Initialize()
     {
         base.Initialize();
-        inventory = new Item[itemdData.Length];
-        for (int i = 0; i < itemdData.Length; i++)
+        inventory = new Item[itemData.Length];
+        for (int i = 0; i < itemData.Length; i++)
         {
             GameObject obj = new GameObject();
             obj.transform.parent = transform;
-            obj.name = itemdData[i].name;
+            obj.name = itemData[i].name;
             obj.AddComponent<Item>();
             inventory[i] = obj.GetComponent<Item>();
             inventory[i].ItemType = (ItemEnum)i;
