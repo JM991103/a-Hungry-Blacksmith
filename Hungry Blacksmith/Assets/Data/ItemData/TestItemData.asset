@@ -17,4 +17,4 @@ MonoBehaviour:
   itemPrefab: {fileID: 0}
   itemIcon: {fileID: 0}
   buyValue: 1000
-  saleValue: 0.7
+  saleRatio: 0
