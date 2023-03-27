@@ -12,11 +12,6 @@ public class StoreNPC : MonoBehaviour
         anim = GetComponent<Animator>();
         dialogue = FindObjectOfType<Dialogue>();
     }
-
-    void Start()
-    {
-        anim.SetBool("IsMoveAction", true);        
-    }
     
     /// <summary>
     /// 애니메이션 이벤트 시스템(Dialogue 출력)

@@ -25,13 +25,13 @@ public class ShopTest : MonoBehaviour
 
     void Buy()
     {
-        Inventory.Inst.AddItem(1, ItemEnum.Rube);
-        rubeCount.text = Inventory.Inst.inventory[(int)ItemEnum.Rube].itemCount.ToString();
+        Inventory.Inst.AddItem(1, ItemEnum.Ruby);
+        rubeCount.text = Inventory.Inst.inventory[(int)ItemEnum.Ruby].itemCount.ToString();
     }
 
     void Sale()
     {
-        Inventory.Inst.SubItem(3, ItemEnum.Rube);
-        rubeCount.text = Inventory.Inst.inventory[(int)ItemEnum.Rube].itemCount.ToString();
+        Inventory.Inst.SubItem(3, ItemEnum.Ruby);
+        rubeCount.text = Inventory.Inst.inventory[(int)ItemEnum.Ruby].itemCount.ToString();
     }
 }

@@ -15,16 +15,15 @@ public enum WeaponEnum
 /// </summary>
 public enum ItemEnum
 {
-    Rube = 0,
-    Dia,
-    Sowrd_2,
-    Sowrd_3,
-    Sowrd_4,
-    Sowrd_5,
-    Sowrd_6,
-    Sowrd_7,
-    Sowrd_8,
-    Sowrd_9,
-    Sowrd_10,
+    Whetstone = 0,
+    Wood,
+    Copper,
+    Iron,
+    Gold,
+    Pearl,
+    Ruby,
+    Emerald,
+    sapphire,
+    Diamond,
     NULL
 }

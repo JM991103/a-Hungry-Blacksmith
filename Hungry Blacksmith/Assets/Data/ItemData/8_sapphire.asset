@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 836d3a4264dec3c4bb6c3d5b93af1d47, type: 3}
-  m_Name: 0_Rube
+  m_Name: 8_sapphire
   m_EditorClassIdentifier: 
-  itemID: 0
-  itemName: "\uB8E8\uBE44"
+  itemID: 8
+  itemName: "\uC0AC\uD30C\uC774\uC5B4"
   itemPrefab: {fileID: 0}
-  itemIcon: {fileID: 21300000, guid: 32183ad940262c24c90be76d24619120, type: 3}
+  itemIcon: {fileID: 21300000, guid: 68048d71d60865b45b151ec7fc370fb3, type: 3}
   buyValue: 0
-  saleRatio: 0
+  saleRatio: 0.5
