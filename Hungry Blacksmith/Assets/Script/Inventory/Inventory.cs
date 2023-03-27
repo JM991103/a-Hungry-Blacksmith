@@ -6,12 +6,12 @@ public class Inventory : Singleton<Inventory>
 {
     public ItemData[] itemdData;        // 총 아이템 데이터
 
-    Item[] inventory;
+    public Item[] inventory;
     ItemEnum selectItem = ItemEnum.NULL;
     protected override void Initialize()
     {
         base.Initialize();
-        inventory = new Item[transform.childCount];
+        inventory = new Item[itemdData.Length];
         for (int i = 0; i < itemdData.Length; i++)
         {
             GameObject obj = new GameObject();
@@ -56,7 +56,7 @@ public class Inventory : Singleton<Inventory>
 
         if (IsValidItem(code) && selectItem != ItemEnum.NULL)
         {
-            if ((inventory[(int)selectItem].itemCount - count) > 0)
+            if ((inventory[(int)selectItem].itemCount - count) >= 0)
             {
                 inventory[(int)selectItem].itemCount -= count;
 

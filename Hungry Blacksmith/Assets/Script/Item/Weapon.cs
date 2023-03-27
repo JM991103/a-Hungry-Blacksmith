@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour
 
 
     TotalWeapon model;
-    WeaponData WeaponModel => model.WeaponDatas[EnganceRange];
+    public WeaponData WeaponModel => model.WeaponDatas[EnganceRange];
 
     public int EnganceRange
     {

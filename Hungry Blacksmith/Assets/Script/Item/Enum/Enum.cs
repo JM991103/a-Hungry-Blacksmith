@@ -16,7 +16,7 @@ public enum WeaponEnum
 public enum ItemEnum
 {
     Rube = 0,
-    Sowrd_1,
+    Dia,
     Sowrd_2,
     Sowrd_3,
     Sowrd_4,

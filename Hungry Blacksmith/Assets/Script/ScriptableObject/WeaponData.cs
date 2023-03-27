@@ -22,6 +22,9 @@ public class WeaponData : ScriptableObject
     [Header("무기 아이템 판매 비용")]
     public int saleValue;
 
+    [Header("판매시 획득 명성치")]
+    public int fameValue;
+
     // 강화 비용
     [Header("무기 강화 비용 (돈)")]
     public int costMoneyValue;
