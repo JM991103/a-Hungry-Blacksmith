@@ -32,17 +32,16 @@ public class Dialogue : MonoBehaviour
         text.gameObject.SetActive(flag);
     }
 
-    public void NextDialogue()
+    public void NextDialogue(int count)
     {
-        text.text = dialogueTexts[count].dialogue;
-        count++;
+        text.text = dialogueTexts[count].dialogue;  
     }
 
     private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
-        
     }
+
     private void Start()
     {
         ShowOnOff(false);
@@ -54,7 +53,8 @@ public class Dialogue : MonoBehaviour
         {
             if (count < dialogueTexts.Length)
             {
-                NextDialogue();
+                NextDialogue(count);
+                count++;
             }
             else
             {

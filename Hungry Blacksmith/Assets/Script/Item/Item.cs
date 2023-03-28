@@ -17,7 +17,7 @@ public class Item : MonoBehaviour
         get => itemType;
         set
         {
-            if (isSetting)
+            if (!isSetting)
             {
                 isSetting = true;
                 itemType = value;
