@@ -499,6 +499,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2881957571907609794, guid: 6ab5ca608548a0a4fa9b112480f9ecc7, type: 3}
+      propertyPath: weaponItems.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881957571907609794, guid: 6ab5ca608548a0a4fa9b112480f9ecc7, type: 3}
+      propertyPath: weaponItems.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: af06120e983839d4f9d1469245de5fc1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ab5ca608548a0a4fa9b112480f9ecc7, type: 3}
 --- !u!1 &965341760

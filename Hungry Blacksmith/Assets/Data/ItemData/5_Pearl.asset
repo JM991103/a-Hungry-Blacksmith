@@ -16,5 +16,5 @@ MonoBehaviour:
   itemName: "\uD751\uC9C4\uC8FC"
   itemPrefab: {fileID: 0}
   itemIcon: {fileID: 21300000, guid: 4e40c2c6894f1fd4e88e892233c3ac02, type: 3}
-  buyValue: 0
+  buyValue: 100
   saleRatio: 0.5
