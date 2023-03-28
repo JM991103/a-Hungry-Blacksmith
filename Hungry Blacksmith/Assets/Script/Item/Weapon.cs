@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
-    int enganceRange = int.MinValue;       // 강화 수치
+    int enganceRange = 0;       // 강화 수치
     Image weaponImage;
 
 
@@ -24,8 +24,8 @@ public class Weapon : MonoBehaviour
                 {
                     enganceRange = value;
                     gameObject.name = $"{WeaponModel.name}";
-                    if(weaponImage != null)
-                    weaponImage.sprite = WeaponModel.itemIcon;
+                    if (weaponImage != null)
+                        weaponImage.sprite = WeaponModel.itemIcon;
                 }
             }
         }
@@ -39,11 +39,9 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         model = GameManager.Inst.WeaponManager.weaponItems[0];
-        
-        if(enganceRange == int.MinValue)
-        {
-            Rest();
-        }
+
+        Rest();
+
     }
 
     public void Rest()
@@ -85,7 +83,7 @@ public class Weapon : MonoBehaviour
                     {
                         Debug.Log($"최하 단계이므로 하락 하지않습니다. : {enganceRange}");
                     }
-                } 
+                }
             }
         }
         else

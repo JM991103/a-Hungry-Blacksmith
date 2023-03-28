@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class EnhanceUI : MonoBehaviour
     Slot selectSlot;
     Slot[] slots;
     Image[] slotImages;
+    Image selectBox;
 
     private void Awake()
     {
@@ -33,6 +35,9 @@ public class EnhanceUI : MonoBehaviour
         {
             slotImages[i] = transform.GetChild(i).GetComponent<Image>();
         }
+
+        selectBox = transform.GetChild(4).GetComponent<Image>();
+        selectBox.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -75,13 +80,18 @@ public class EnhanceUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 슬롯 선택
+    /// </summary>
+    /// <param name="slot"></param>
     void SettingSlot(Slot slot)
     {
         if (selectSlot != slot)
         {
+            // 선택
             if (selectSlot == null)
             {
-                enhanceButton.interactable = true;
+                enhanceButton.interactable = true;      // 버튼 활성화
             }
 
             selectSlot = slot;
@@ -90,13 +100,18 @@ public class EnhanceUI : MonoBehaviour
             {
                 if (slots[i] == slot)
                 {
+                    // 선택한 슬롯이면
                     slotImages[i].color = selectColor;
+                    selectBox.transform.SetParent(slotImages[i].transform);
+                    selectBox.rectTransform.anchoredPosition = Vector3.zero;
                 }
                 else
                 {
+                    // 선택한 슬롯이 아니면
                     slotImages[i].color = ideColor;
                 }
             }
+            selectBox.gameObject.SetActive(true);
         }
         else
         {
@@ -107,6 +122,8 @@ public class EnhanceUI : MonoBehaviour
             {
                 slotImages[i].color = ideColor;
             }
+            selectBox.transform.SetParent(transform);
+            selectBox.gameObject.SetActive(false);
         }
     }
 }
