@@ -59,7 +59,7 @@ public class UI : MonoBehaviour
     /// <summary>
     /// 사용 가능한 골드
     /// </summary>
-    int gold;
+    int gold = 0;
 
     /// <summary>
     /// 명성치
@@ -103,11 +103,9 @@ public class UI : MonoBehaviour
         get => gold;
         set
         {
-            if (gold != value)
-            {
-                gold = value;
-                goldText.text = $"{gold}";
-            }
+            gold = value;
+            goldText.text = $"{gold}G";
+
         }
     }
 
@@ -171,6 +169,10 @@ public class UI : MonoBehaviour
         nextDayImage.gameObject.SetActive(false);
         nextDayText = nextDayImage.GetComponentInChildren<TextMeshProUGUI>();
         nextDayText.gameObject.SetActive(false);
+    }
+    private void Start()
+    {
+        Gold = 10000;
     }
 
     /// <summary>

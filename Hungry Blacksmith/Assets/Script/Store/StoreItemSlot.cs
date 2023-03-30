@@ -15,6 +15,7 @@ public class StoreItemSlot : MonoBehaviour, IPointerClickHandler
 
     public TextMeshProUGUI ItemName => itemName;
     public TextMeshProUGUI ItemPrice => itemPrice;
+    public Dialogue Dialogue => dialogue;
 
 
     public Action<StoreItemSlot> onStoreItemSlot;
