@@ -17,8 +17,13 @@ MonoBehaviour:
   itemPrefab: {fileID: 0}
   itemIcon: {fileID: 21300000, guid: 284ccb4a824218d4486b5dddebc5f617, type: 3}
   saleValue: 0
+  fameValue: 0
   costMoneyValue: 0
-  costData: []
+  costData:
+  - costItem: 0
+    costItemValue: 20
+  - costItem: 1
+    costItemValue: 20
   enforceRatio: 1
   destroy: 0
   changeWeaponData:

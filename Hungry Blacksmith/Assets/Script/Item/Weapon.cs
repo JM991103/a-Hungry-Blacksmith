@@ -12,6 +12,7 @@ public class Weapon : MonoBehaviour
 
     TotalWeapon model;
     public WeaponData WeaponModel => model.WeaponDatas[EnganceRange];
+    public WeaponData NextWeaponModel => model.WeaponDatas[EnganceRange + 1 < model.WeaponDatas.Length ? EnganceRange + 1 : EnganceRange];
 
     public int EnganceRange
     {
@@ -109,7 +110,7 @@ public class Weapon : MonoBehaviour
 
     bool MaterialInspection()
     {
-        bool result = false;
+        bool result = true;         // false로 수정해야함
 
         if (WeaponModel.costData.Length != 0)
         {

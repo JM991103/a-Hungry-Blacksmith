@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,14 +10,24 @@ public class EnhanceUI : MonoBehaviour
     public Color selectColor;
     public Color ideColor;
 
-    Button enhanceButton;
-    Button yesButton;
-    Button noButton;
-
     Slot selectSlot;
     Slot[] slots;
     Image[] slotImages;
     Image selectBox;
+    Button enhanceButton;
+
+    // 강화 창 ---------------------------------------------------------------
+
+    Button yesButton;
+    Button noButton;
+
+    CanvasGroup windowGroup;
+
+    Image presentWeaponImage;
+    Image nextWeaponImage;
+    TextMeshProUGUI presenWeaponName;
+    TextMeshProUGUI nextWeaponName;
+    ItemMaterial[] itemMaterials;
 
     private void Awake()
     {
@@ -38,6 +49,28 @@ public class EnhanceUI : MonoBehaviour
 
         selectBox = transform.GetChild(4).GetComponent<Image>();
         selectBox.gameObject.SetActive(false);
+
+        // 강화 창 컴포넌트 찾기 --------------------------------------------------------------------------
+
+        windowGroup = GetComponentInChildren<CanvasGroup>();
+
+        yesButton = windowGroup.transform.GetChild(4).GetComponent<Button>();
+        yesButton.onClick.AddListener(EnhanceStart);
+        noButton = windowGroup.transform.GetChild(5).GetComponent<Button>();
+        noButton.onClick.AddListener(EnhanceWindowClose);
+
+        presentWeaponImage = windowGroup.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+        nextWeaponImage = windowGroup.transform.GetChild(2).GetChild(0).GetComponent<Image>();
+
+        presenWeaponName = presentWeaponImage.transform.parent.GetComponentInChildren<TextMeshProUGUI>();
+        nextWeaponName = nextWeaponImage.transform.parent.GetComponentInChildren<TextMeshProUGUI>();
+
+        itemMaterials = GetComponentsInChildren<ItemMaterial>();
+
+        foreach( var itemMaterial in itemMaterials )
+        {
+            itemMaterial.gameObject.SetActive(false);
+        }
     }
 
     private void Start()
@@ -59,12 +92,19 @@ public class EnhanceUI : MonoBehaviour
                 slots[i].weapon.Rest();
             }
         }
+
+        EnhanceWindowClose();
     }
 
     /// <summary>
     /// 강화안내문구 함수. (강화 상세정보 출력 및 할지 말지 선택)
     /// </summary>
     void EnhanceAnnouncementText()
+    {
+        EnhanceWindowOpen();
+    }
+
+    void EnhanceStart()
     {
         if (selectSlot != null)
         {
@@ -76,8 +116,9 @@ public class EnhanceUI : MonoBehaviour
             {
                 gameManager.WeaponSave(slots[i].weapon, i);
             }
-
         }
+
+        EnhanceWindowClose();
     }
 
     /// <summary>
@@ -124,6 +165,43 @@ public class EnhanceUI : MonoBehaviour
             }
             selectBox.transform.SetParent(transform);
             selectBox.gameObject.SetActive(false);
+        }
+    }
+
+    void EnhanceWindowOpen()
+    {
+        if (selectSlot != null)
+        {
+            windowGroup.alpha = 1.0f;
+            windowGroup.blocksRaycasts = true;
+
+            // 무기 이미지 적용
+            presentWeaponImage.sprite = selectSlot.weapon.WeaponModel.itemIcon;
+            nextWeaponImage.sprite = selectSlot.weapon.NextWeaponModel.itemIcon;
+
+            // 무기 이름 적용
+            presenWeaponName.text = selectSlot.weapon.WeaponModel.itemName;
+            nextWeaponName.text = selectSlot.weapon.NextWeaponModel.itemName;
+
+            int index = selectSlot.weapon.WeaponModel.costData.Length;
+
+            for (int i = 0; i < index; i++)
+            {
+                itemMaterials[i].gameObject.SetActive(true) ;
+                itemMaterials[i].image.sprite = Inventory.Inst.itemData[(int)selectSlot.weapon.WeaponModel.costData[i].costItem].itemIcon;
+                itemMaterials[i].TextChange(Inventory.Inst.inventory[(int)selectSlot.weapon.WeaponModel.costData[i].costItem].itemCount, selectSlot.weapon.WeaponModel.costData[i].costItemValue);
+            }
+        }
+    }
+
+    void EnhanceWindowClose()
+    {
+        windowGroup.alpha = 0.0f;
+        windowGroup.blocksRaycasts = false;
+
+        for (int i = 0; i < itemMaterials.Length; i++)
+        {
+            itemMaterials[i].gameObject.SetActive(false);
         }
     }
 }
