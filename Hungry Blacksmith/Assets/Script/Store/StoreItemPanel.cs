@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class StoreItemPanel : MonoBehaviour
 {
+    WeaponSalePanel weaponSalePanel;
     //Inventory inventory;
     StoreItemSlot[] itemSlots;
     StoreItemSlot itemSlot;
@@ -15,6 +16,7 @@ public class StoreItemPanel : MonoBehaviour
     TextMeshProUGUI selectSlotItemName;
     TextMeshProUGUI selectSlotItemPrice;
 
+    Button weaponSale;
     Button buyButton;
     Button saleButton;
     Button exitButton;
@@ -47,9 +49,13 @@ public class StoreItemPanel : MonoBehaviour
 
     private void Awake()
     {
+        weaponSalePanel = FindObjectOfType<WeaponSalePanel>();
         //inventory = FindObjectOfType<Inventory>();
         itemSlots = GetComponentsInChildren<StoreItemSlot>();
         itemSlot = GetComponentInChildren<StoreItemSlot>();
+
+        weaponSale = transform.GetChild(10).GetComponent<Button>();
+        weaponSale.onClick.AddListener(() => weaponSalePanel.WeaponSalePanelOnOff(true));
 
         Transform select = transform.GetChild(11).GetChild(0).GetChild(0);
         selectSlotItemName = select.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
