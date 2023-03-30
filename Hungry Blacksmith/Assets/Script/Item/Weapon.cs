@@ -11,8 +11,16 @@ public class Weapon : MonoBehaviour
 
 
     TotalWeapon model;
+
+    public TotalWeapon Model => model;
     public WeaponData WeaponModel => model.WeaponDatas[EnganceRange];
     public WeaponData NextWeaponModel => model.WeaponDatas[EnganceRange + 1 < model.WeaponDatas.Length ? EnganceRange + 1 : EnganceRange];
+
+    public Action<int> enhanceSuccess;  // 강화 성공
+    public Action<int> enhanceFail;     // 강화 실패
+    public Action<int> enganceDestroy;  // 무기 파괴
+    public Action lack;     // 재료가 부족할 때 
+
 
     public int EnganceRange
     {
@@ -96,26 +104,57 @@ public class Weapon : MonoBehaviour
     void EnhanceSuccess()
     {
         EnganceRange++;
+        enhanceSuccess?.Invoke(EnganceRange);
     }
 
     void EnhanceFail()
     {
         EnganceRange--;
+        enhanceFail?.Invoke(EnganceRange);
     }
 
     void EnganceDestroy()
     {
         EnganceRange = 0;
+        enganceDestroy?.Invoke(EnganceRange);
     }
 
+    /// <summary>
+    /// 인벤토리에서 재료가 충분한지 검사
+    /// </summary>
+    /// <returns></returns>
     bool MaterialInspection()
     {
-        bool result = true;         // false로 수정해야함
+        bool result = false;         // false로 수정해야함
 
         if (WeaponModel.costData.Length != 0)
         {
             // 강화 재료가 하나라도 필요하면
+            int index = WeaponModel.costData.Length;
+            Inventory inven = Inventory.Inst;
+            for (int i = 0; i < index; i++)
+            {
+                if (WeaponModel.costData[i].costItemValue <= inven.inventory[(int)WeaponModel.costData[i].costItem].itemCount)
+                {
+                    result = true;
+                }
+                else
+                {
+                    result = false;
+                    Debug.Log("재료가 부족합니다.");
+                    lack?.Invoke();
+                    break;
+                }
+            }
 
+            if(result)
+            {
+                // 모든 재료가 있다면 해당 재료를 인벤토리에서 감소
+                for (int i = 0; i < index; i++)
+                {
+                    inven.SubItem(WeaponModel.costData[i].costItemValue, WeaponModel.costData[i].costItem);
+                }
+            }
         }
         else
         {

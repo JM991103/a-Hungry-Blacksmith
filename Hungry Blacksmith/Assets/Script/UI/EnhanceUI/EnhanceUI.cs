@@ -20,6 +20,7 @@ public class EnhanceUI : MonoBehaviour
 
     Button yesButton;
     Button noButton;
+    Button popUpButton;
 
     CanvasGroup windowGroup;
 
@@ -28,6 +29,11 @@ public class EnhanceUI : MonoBehaviour
     TextMeshProUGUI presenWeaponName;
     TextMeshProUGUI nextWeaponName;
     ItemMaterial[] itemMaterials;
+
+    PopUpWindow popUpWindow;
+    TextMeshProUGUI popUpText;
+
+    bool isHighLevel = false;
 
     private void Awake()
     {
@@ -39,6 +45,10 @@ public class EnhanceUI : MonoBehaviour
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].selectWeaponSlot += SettingSlot;
+            slots[i].weapon.enhanceSuccess += SuccessPopUpWindow;
+            slots[i].weapon.enhanceFail += FailPopUpWindow;
+            slots[i].weapon.enganceDestroy += DestroyPopUpWindow;
+            slots[i].weapon.lack += LackPopUpWindow;
         }
 
         slotImages = new Image[slots.Length];
@@ -67,10 +77,16 @@ public class EnhanceUI : MonoBehaviour
 
         itemMaterials = GetComponentsInChildren<ItemMaterial>();
 
-        foreach( var itemMaterial in itemMaterials )
+        foreach (var itemMaterial in itemMaterials)
         {
             itemMaterial.gameObject.SetActive(false);
         }
+
+        popUpWindow = GetComponentInChildren<PopUpWindow>();
+        popUpButton = popUpWindow.GetComponentInChildren<Button>();
+        popUpButton.onClick.AddListener(PopUpWindowClose);
+
+        popUpText = popUpWindow.transform.GetChild(2).GetComponent<TextMeshProUGUI>();
     }
 
     private void Start()
@@ -93,6 +109,7 @@ public class EnhanceUI : MonoBehaviour
             }
         }
 
+        PopUpWindowClose();
         EnhanceWindowClose();
     }
 
@@ -117,8 +134,6 @@ public class EnhanceUI : MonoBehaviour
                 gameManager.WeaponSave(slots[i].weapon, i);
             }
         }
-
-        EnhanceWindowClose();
     }
 
     /// <summary>
@@ -182,14 +197,31 @@ public class EnhanceUI : MonoBehaviour
             // 무기 이름 적용
             presenWeaponName.text = selectSlot.weapon.WeaponModel.itemName;
             nextWeaponName.text = selectSlot.weapon.NextWeaponModel.itemName;
-
-            int index = selectSlot.weapon.WeaponModel.costData.Length;
-
-            for (int i = 0; i < index; i++)
+            if (selectSlot.weapon.EnganceRange < selectSlot.weapon.Model.WeaponDatas.Length - 1)
             {
-                itemMaterials[i].gameObject.SetActive(true) ;
-                itemMaterials[i].image.sprite = Inventory.Inst.itemData[(int)selectSlot.weapon.WeaponModel.costData[i].costItem].itemIcon;
-                itemMaterials[i].TextChange(Inventory.Inst.inventory[(int)selectSlot.weapon.WeaponModel.costData[i].costItem].itemCount, selectSlot.weapon.WeaponModel.costData[i].costItemValue);
+                int index = selectSlot.weapon.WeaponModel.costData.Length;
+
+                for (int i = 0; i < itemMaterials.Length; i++)
+                {
+                    if (i < index)
+                    {
+                        // 재료 종류 개수가 i보다 크면
+                        itemMaterials[i].gameObject.SetActive(true);
+                        itemMaterials[i].image.sprite = Inventory.Inst.itemData[(int)selectSlot.weapon.WeaponModel.costData[i].costItem].itemIcon;
+                        itemMaterials[i].TextChange(Inventory.Inst.inventory[(int)selectSlot.weapon.WeaponModel.costData[i].costItem].itemCount, selectSlot.weapon.WeaponModel.costData[i].costItemValue);
+                    }
+                    else
+                    {
+                        itemMaterials[i].gameObject.SetActive(false);
+                    }
+                }
+            }
+            else
+            {
+                // 현재 최고 단계
+                // 강화창 닫고 파업창 출력
+                isHighLevel = !isHighLevel;
+                WaeponHighestLevel();
             }
         }
     }
@@ -202,6 +234,54 @@ public class EnhanceUI : MonoBehaviour
         for (int i = 0; i < itemMaterials.Length; i++)
         {
             itemMaterials[i].gameObject.SetActive(false);
+        }
+    }
+
+    void SuccessPopUpWindow(int range)
+    {
+        PopUpWindowOpen();
+        popUpText.text = $"강화에 성공하여 강화 단계가 상승합니다.\r\n현재 강화 단계 : {range}";
+    }
+    void FailPopUpWindow(int range)
+    {
+        PopUpWindowOpen();
+        popUpText.text = $"강화에 실패하여 강화 단계가 하락합니다.\r\n현재 강화 단계 : {range}";
+    }
+    void DestroyPopUpWindow(int range)
+    {
+        PopUpWindowOpen();
+        popUpText.text = $"무기가 파괴 되어 0강으로 돌아갑니다.\r\n현재 강화 단계 : {range}";
+    }
+
+    void LackPopUpWindow()
+    {
+        PopUpWindowOpen();
+        popUpText.text = $"재료가 부족합니다.";
+    }
+
+    void WaeponHighestLevel()
+    {
+        PopUpWindowOpen();
+        popUpText.text = $"현재 최고 단계입니다.";
+    }
+
+    void PopUpWindowOpen()
+    {
+        popUpWindow.gameObject.SetActive(true);
+    }
+
+    void PopUpWindowClose()
+    {
+        popUpWindow.gameObject.SetActive(false);
+
+        if (!isHighLevel)
+        {
+            EnhanceWindowOpen(); 
+        }
+        else
+        {
+            isHighLevel = !isHighLevel;
+            EnhanceWindowClose();
         }
     }
 }
