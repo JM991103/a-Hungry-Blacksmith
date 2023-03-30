@@ -24,11 +24,26 @@ public class StoreItemPanel : MonoBehaviour
     TextMeshProUGUI selectSlotMinText;
     TextMeshProUGUI selectSlotInputFieldText;
 
+    Image selectImage2;
+    TextMeshProUGUI informationText;
+    TextMeshProUGUI possessionitem;
+    TextMeshProUGUI itemPriceText;
+    Button yesButton;
+    Button noButton;
+
+    Image informationImage;
+    TextMeshProUGUI popUpwindow;
+    Button popupButton;
+
+    UI ui;
+
     //int itemCount;
     int itemCountMin = 1;
     int itemCountMax = 999;
 
     int selectIndex;
+
+    bool isBuy;
 
     private void Awake()
     {
@@ -37,9 +52,9 @@ public class StoreItemPanel : MonoBehaviour
         itemSlot = GetComponentInChildren<StoreItemSlot>();
 
         Transform select = transform.GetChild(11).GetChild(0).GetChild(0);
-        selectSlotItemName = select.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-        selectSlotItemPrice = select.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
-        selectSlotItemIcon = select.GetChild(0).GetChild(2).GetComponent<Image>();
+        selectSlotItemName = select.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+        selectSlotItemPrice = select.GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
+        selectSlotItemIcon = select.GetChild(0).GetChild(3).GetComponent<Image>();
 
         for (int i = 0; i < itemSlots.Length; i++)
         {
@@ -53,20 +68,38 @@ public class StoreItemPanel : MonoBehaviour
         saleButton.onClick.AddListener(SaleStoreItem);
 
         exitButton = select.GetChild(4).GetComponent<Button>();
-        exitButton.onClick.AddListener(() =>
-        {
-            itemSlot.selectImage.gameObject.SetActive(false);
-            selectSlotSlider.value = itemCountMin;
-        });
+        exitButton.onClick.AddListener(itemSlotActive);
 
         selectSlotSlider = select.GetChild(3).GetComponent<Slider>();
         selectSlotInputField = select.GetChild(3).GetChild(5).GetComponent<TMP_InputField>();
         selectSlotInputFieldText = select.GetChild(3).GetChild(5).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
         selectSlotMinText = select.GetChild(3).GetChild(3).GetComponent<TextMeshProUGUI>();
+
+        select = transform.GetChild(12);
+        selectImage2 = select.GetComponent<Image>();
+        informationText = select.GetChild(0).GetChild(0).GetChild(2).GetComponent<TextMeshProUGUI>();
+        possessionitem = select.GetChild(0).GetChild(0).GetChild(3).GetComponent<TextMeshProUGUI>();
+        itemPriceText = select.GetChild(0).GetChild(0).GetChild(4).GetComponent<TextMeshProUGUI>();
+
+        yesButton = select.GetChild(0).GetChild(0).GetChild(5).GetComponent<Button>();
+        yesButton.onClick.AddListener(YesButtonFunction);
+        noButton = select.GetChild(0).GetChild(0).GetChild(6).GetComponent<Button>();
+        noButton.onClick.AddListener(() => NoButtonFunction());
+
+        select = transform.GetChild(13);
+        informationImage = select.GetComponent<Image>();
+        popUpwindow = select.GetChild(0).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+        popupButton = select.GetChild(0).GetChild(0).GetChild(2).GetComponent<Button>();
+        popupButton.onClick.AddListener(() => informationImage.gameObject.SetActive(false));
+
+        ui = FindObjectOfType<UI>();
     }
 
     private void Start()
     {
+        selectImage2.gameObject.SetActive(false);
+        informationImage.gameObject.SetActive(false);
+
         for (int i = 0; i < Inventory.Inst.itemData.Length; i++)
         {
             itemSlots[i].ItemName.text = Inventory.Inst.itemData[i].itemName;
@@ -131,12 +164,103 @@ public class StoreItemPanel : MonoBehaviour
 
     void BuyStoreItem()
     {
-       Inventory.Inst.AddItem((int)selectSlotSlider.value, (ItemEnum)selectIndex);
-       
+        itemSlot.selectImage.gameObject.SetActive(false);
+        selectImage2.gameObject.SetActive(true);
+        BuyText();        
     }
 
     void SaleStoreItem()
     {
-        Inventory.Inst.SubItem((int)selectSlotSlider.value, (ItemEnum)Inventory.Inst.itemData[selectIndex].itemID);
+        itemSlot.selectImage.gameObject.SetActive(false);
+        selectImage2.gameObject.SetActive(true);
+        SaleText();        
+    }
+
+    void itemSlotActive()
+    {
+        itemSlot.selectImage.gameObject.SetActive(false);
+        selectSlotSlider.value = itemCountMin;
+    }
+
+    // 2번째패널 "구매 및 판매" 버튼
+    void YesButtonFunction()
+    {
+        if (isBuy)
+        {
+            // 구매 가능(골드가 충분 함)
+            if (ui.Gold >= (int)selectSlotSlider.value * Inventory.Inst.itemData[selectIndex].buyValue)
+            {
+                itemSlot.Dialogue.NextDialogue(2);
+                Inventory.Inst.AddItem((int)selectSlotSlider.value, (ItemEnum)selectIndex);
+                ui.Gold -= (int)selectSlotSlider.value * Inventory.Inst.itemData[selectIndex].buyValue;
+                selectSlotSlider.value = itemCountMin;
+                selectImage2.gameObject.SetActive(false); 
+            }
+            else
+            {
+                // 골드가 부족함
+                informationImage.gameObject.SetActive(true);
+                NoButtonFunction();
+                itemSlot.Dialogue.NextDialogue(4);
+                popUpwindow.text = "골드가 부족합니다.";
+            }
+        }
+        else
+        {
+            // 재료 아이템 판매 가능
+            if (Inventory.Inst.inventory[selectIndex].itemCount >= (int)selectSlotSlider.value)
+            {
+                itemSlot.Dialogue.NextDialogue(3);
+                Inventory.Inst.SubItem((int)selectSlotSlider.value, (ItemEnum)Inventory.Inst.itemData[selectIndex].itemID);
+                ui.Gold += (int)selectSlotSlider.value * Inventory.Inst.itemData[selectIndex].SaleValue;
+                selectSlotSlider.value = itemCountMin;
+                selectImage2.gameObject.SetActive(false); 
+            }
+            else
+            {
+                // 판매할 재료가 부족함
+                informationImage.gameObject.SetActive(true);
+                NoButtonFunction();
+                itemSlot.Dialogue.NextDialogue(5);
+                popUpwindow.text = "판매할 아이템이 부족합니다.";
+            }
+        }
+
+        Debug.Log($"{Inventory.Inst.inventory[selectIndex].itemCount}");
+    }
+
+
+    // 2번째패널 "취소" 버튼
+    void NoButtonFunction()
+    {
+        //Inventory.Inst.SubItem((int)selectSlotSlider.value, (ItemEnum)Inventory.Inst.itemData[selectIndex].itemID);
+        selectImage2.gameObject.SetActive(false);
+        selectSlotSlider.value = itemCountMin;
+    }
+
+    void BuyText()
+    {
+        isBuy = true;
+
+        //다이아몬드 아이템을 999개 구매하시겠습니까?
+        informationText.text = $"{Inventory.Inst.itemData[selectIndex].itemName} 아이템을 {(int)selectSlotSlider.value}개 구매하시겠습니까?";
+        //소지한 아이템 수 9999999
+        possessionitem.text = $"소지한 아이템 수 {Inventory.Inst.inventory[selectIndex].itemCount}";
+        //총 999999G 입니다.
+        itemPriceText.text = $"총 {(int)selectSlotSlider.value * Inventory.Inst.itemData[selectIndex].buyValue}G 입니다.";
+
+    }
+
+    void SaleText()
+    {
+        isBuy = false;
+
+        //다이아몬드 아이템을 999개 판매하시겠습니까?
+        informationText.text = $"{Inventory.Inst.itemData[selectIndex].itemName} 아이템을 {(int)selectSlotSlider.value}개 판매하시겠습니까?";
+        //소지한 아이템 수 9999999
+        possessionitem.text = $"소지한 아이템 수 {Inventory.Inst.inventory[selectIndex].itemCount}";
+        //총 999999G 입니다.
+        itemPriceText.text = $"총 {(int)selectSlotSlider.value * Inventory.Inst.itemData[selectIndex].SaleValue}G 입니다.";
+                
     }
 }
