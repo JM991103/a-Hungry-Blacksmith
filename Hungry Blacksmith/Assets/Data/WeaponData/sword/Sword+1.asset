@@ -24,8 +24,8 @@ MonoBehaviour:
     costItemValue: 20
   - costItem: 1
     costItemValue: 20
-  enforceRatio: 1
-  destroy: 0
+  enforceRatio: 0.9
+  destroy: 0.01
   changeWeaponData:
   - {fileID: 0}
   - {fileID: 0}

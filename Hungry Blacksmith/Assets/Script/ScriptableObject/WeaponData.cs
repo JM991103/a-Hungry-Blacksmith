@@ -46,7 +46,7 @@ public class WeaponData : ScriptableObject
 
     public float DropRatio
     {
-        get => 1 - enforceRatio + destroy;
+        get => 1 - enforceRatio - destroy;
     }
 
     public float DestroyRatio => enforceRatio + destroy;

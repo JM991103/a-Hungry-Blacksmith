@@ -29,6 +29,7 @@ public class EnhanceUI : MonoBehaviour
     TextMeshProUGUI presenWeaponName;
     TextMeshProUGUI nextWeaponName;
     ItemMaterial[] itemMaterials;
+    TextMeshProUGUI enhanceRatioText;
 
     PopUpWindow popUpWindow;
     TextMeshProUGUI popUpText;
@@ -76,6 +77,7 @@ public class EnhanceUI : MonoBehaviour
         nextWeaponName = nextWeaponImage.transform.parent.GetComponentInChildren<TextMeshProUGUI>();
 
         itemMaterials = GetComponentsInChildren<ItemMaterial>();
+        enhanceRatioText = windowGroup.transform.GetChild(7).GetComponent<TextMeshProUGUI>();
 
         foreach (var itemMaterial in itemMaterials)
         {
@@ -197,6 +199,9 @@ public class EnhanceUI : MonoBehaviour
             // 무기 이름 적용
             presenWeaponName.text = selectSlot.weapon.WeaponModel.itemName;
             nextWeaponName.text = selectSlot.weapon.NextWeaponModel.itemName;
+
+            enhanceRatioText.text = $"성공 확률 : {selectSlot.weapon.WeaponModel.enforceRatio * 100:f2}%\r\n하락 확률 : {selectSlot.weapon.WeaponModel.DropRatio * 100:f2}%\r\n파괴 확률 : {selectSlot.weapon.WeaponModel.destroy * 100:f2}%";
+
             if (selectSlot.weapon.EnganceRange < selectSlot.weapon.Model.WeaponDatas.Length - 1)
             {
                 int index = selectSlot.weapon.WeaponModel.costData.Length;
