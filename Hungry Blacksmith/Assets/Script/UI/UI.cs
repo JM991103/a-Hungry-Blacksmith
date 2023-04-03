@@ -59,12 +59,12 @@ public class UI : MonoBehaviour
     /// <summary>
     /// 사용 가능한 골드
     /// </summary>
-    int gold = 0;
+    int gold = -1;
 
     /// <summary>
     /// 명성치
     /// </summary>
-    int fame;
+    int fame = -1;
 
     /// <summary>
     /// 플레이한 날짜
@@ -173,6 +173,7 @@ public class UI : MonoBehaviour
     private void Start()
     {
         Gold = 10000;
+        Fame = 0;
     }
 
     /// <summary>

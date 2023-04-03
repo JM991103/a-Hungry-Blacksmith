@@ -47,10 +47,10 @@ public class GameManager : Singleton<GameManager>
         {
             // 판매
             // 판매시 골드 증가
-            int gold = weapons[index].WeaponModel.saleValue;
+            ui.Gold += weapons[index].WeaponModel.saleValue;
 
             // 판매시 명성치 증가
-            int fame = weapons[index].WeaponModel.fameValue;
+            ui.Fame += weapons[index].WeaponModel.fameValue;
 
             // 판매시 해당 무기 강화수치 0으로 만들기
             weapons[index].EnganceRange = 0;

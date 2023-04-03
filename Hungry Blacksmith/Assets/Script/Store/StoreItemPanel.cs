@@ -47,6 +47,15 @@ public class StoreItemPanel : MonoBehaviour
 
     bool isBuy;
 
+    TextMeshProUGUI SelectSlotItemPrice
+    {
+        get => selectSlotItemPrice;
+        set
+        {
+            selectSlotItemPrice = value;
+        }
+    }
+
     private void Awake()
     {
         weaponSalePanel = FindObjectOfType<WeaponSalePanel>();
@@ -138,6 +147,7 @@ public class StoreItemPanel : MonoBehaviour
         selectSlotSlider.value = Mathf.Clamp(value, itemCountMin, itemCountMax);
         selectSlotMinText.text = selectSlotSlider.value.ToString("F0");
         selectSlotInputField.text = ((int)selectSlotSlider.value).ToString();
+        //selectSlotItemPrice.text = ((int)selectSlotSlider.value * Inventory.Inst.itemData[selectIndex].buyValue).ToString() + "G";
     }
 
     private void OninputChange(string text)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,12 @@ public class WeaponSalePanel : MonoBehaviour
 
     StoreWeaponSlot[] storeWeaponSlot;
     StoreWeaponSlot WeaponSlot;
+
+    Image completePanel;
+    TextMeshProUGUI completeText;
+    Button completeButton;
+
+    int selectSlot;
 
     private void Awake()
     {
@@ -39,6 +46,12 @@ public class WeaponSalePanel : MonoBehaviour
 
         weaponSelectBox = select.GetChild(6).GetComponent<Image>();
         weaponSelectBox.gameObject.SetActive(false);
+
+        select = transform.GetChild(0).GetChild(1);
+        completePanel = select.GetComponent<Image>();
+        completeText = select.GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        completeButton = select.GetChild(0).GetChild(1).GetComponent<Button>();
+        completeButton.onClick.AddListener(WeaponSalecompleteButton);
     }
 
     private void Start()
@@ -48,6 +61,8 @@ public class WeaponSalePanel : MonoBehaviour
 
     public void WeaponSalePanelOnOff(bool flag)
     {
+        completePanel.gameObject.SetActive(false);
+
         if (flag)
         {
             for (int i = 0; i < storeWeaponSlot.Length; i++)
@@ -83,7 +98,8 @@ public class WeaponSalePanel : MonoBehaviour
             {
                 if (storeWeaponSlot[i] == slot)
                 {
-                    // 선택한 슬롯                    
+                    // 선택한 슬롯
+                    selectSlot = i;
                     storeWeaponSlot[i].Weaponpanel.color = selectColor;
                     weaponSelectBox.transform.SetParent(storeWeaponSlot[i].transform);
                     weaponSelectBox.rectTransform.anchoredPosition = Vector3.zero;
@@ -119,5 +135,34 @@ public class WeaponSalePanel : MonoBehaviour
     void WeaponSaleButton()
     {
         Debug.Log("무기 판매");
+        if (GameManager.Inst.Weapons[selectSlot].EnganceRange != 0) // 판매 가능
+        {
+            GameManager.Inst.SaleWeapon(selectSlot);
+            WeaponSaleSuccess();
+            storeWeaponSlot[selectSlot].WeaponImage.sprite = GameManager.Inst.Weapons[0].WeaponModel.itemIcon;
+            storeWeaponSlot[selectSlot].WeaponName.text = GameManager.Inst.Weapons[0].WeaponModel.itemName;
+            storeWeaponSlot[selectSlot].WeaponPrice.text = GameManager.Inst.Weapons[0].WeaponModel.saleValue.ToString() + "G";
+        }
+        else
+        {
+            WeaponSaleFail();
+        }
+    }
+
+    void WeaponSaleSuccess()
+    {
+        completeText.text = "무기가 판매되었습니다.";
+        completePanel.gameObject.SetActive(true);
+    }
+
+    void WeaponSaleFail()
+    {
+        completeText.text = "판매 가능한 무기가 없습니다.";
+        completePanel.gameObject.SetActive(true);
+    }
+
+    void WeaponSalecompleteButton()
+    {
+        completePanel.gameObject.SetActive(false);        
     }
 }
