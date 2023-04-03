@@ -25,6 +25,8 @@ public class SelectWindow : MonoBehaviour
 
     TMP_InputField inputField;
 
+    public Action<string> purchasefail;
+
     int itemCount;
     int ItemCount
     {
@@ -34,7 +36,7 @@ public class SelectWindow : MonoBehaviour
             itemCount = value;
             if (selectslot != null)
             {
-                selectGoldText.text = $"{itemCount * selectslot.goldValue} g"; 
+                selectGoldText.text = $"{itemCount * selectslot.goldValue :#,0} g"; 
             }
         }
     }
@@ -61,6 +63,8 @@ public class SelectWindow : MonoBehaviour
 
         inputField = GetComponentInChildren<TMP_InputField>();
         inputField.onValueChanged.AddListener(InputFieldValueChange);
+
+        
     }
 
 
@@ -69,6 +73,10 @@ public class SelectWindow : MonoBehaviour
         Close();
     }
 
+    /// <summary>
+    /// 구매 창 열기
+    /// </summary>
+    /// <param name="slot"></param>
     public void Open(ItemSlot slot)
     {
         selectslot = slot;
@@ -88,6 +96,9 @@ public class SelectWindow : MonoBehaviour
         sliderMaxText.text = $"{amount}(MAX)";
     }
 
+    /// <summary>
+    /// 구매창 닫기
+    /// </summary>
     void Close()
     {
         canvasGroup.alpha = 0.0f;
@@ -117,12 +128,26 @@ public class SelectWindow : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 아이템 구매
+    /// </summary>
     void BuyItem()
     {
-        selectslot.BuyCount += ItemCount;
+        UI ui = UI.Instance;
+        int buyGold = ItemCount * selectslot.goldValue;
 
-        Inventory.Inst.AddItem(ItemCount, selectslot.itemEnum);
-
-        Close();
+        string text;
+        if (ui.Gold >= buyGold)
+        {
+            selectslot.BuyCount += ItemCount;
+            ui.Gold -= buyGold;
+            Inventory.Inst.AddItem(ItemCount, selectslot.itemEnum);
+            Close();
+        }
+        else
+        {
+            text = "골드가 부족합니다.";
+            purchasefail?.Invoke(text);
+        }
     }
 }

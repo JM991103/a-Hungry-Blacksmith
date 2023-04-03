@@ -57,7 +57,7 @@ public class ItemSlots : MonoBehaviour
 
         for (int i = 0; i < randomItem.Count; i++)
         {
-            slots[i].SlotInitialize((ItemEnum)randomItem[i], shop.SaleRatio);      // 해당 슬롯 설정
+            slots[i].SlotInitialize((ItemEnum)randomItem[i], shop.ItemSaleRatio);      // 해당 슬롯 설정
         }
     }
 }

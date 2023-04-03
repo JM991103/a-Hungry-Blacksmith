@@ -125,7 +125,9 @@ public class EnhanceUI : MonoBehaviour
 
     void EnhanceStart()
     {
-        if (selectSlot != null)
+        UI ui = UI.Instance;
+
+        if (selectSlot != null && ui.HP > 0)
         {
             selectSlot.weapon.Enhance();        // 지금은 누르면 바로 강화 추후 상의 후 결정
 
@@ -135,6 +137,8 @@ public class EnhanceUI : MonoBehaviour
             {
                 gameManager.WeaponSave(slots[i].weapon, i);
             }
+
+            ui.HP--;
         }
     }
 
