@@ -50,12 +50,12 @@ public class UI : MonoBehaviour
     /// <summary>
     /// 최대 체력
     /// </summary>
-    int maxhp = 5;
+    int maxhp = 10;
 
     /// <summary>
     /// 현재 체력
     /// </summary>
-    int hp = 5;
+    int hp = -1;
 
     /// <summary>
     /// 사용 가능한 골드
@@ -70,7 +70,9 @@ public class UI : MonoBehaviour
     /// <summary>
     /// 플레이한 날짜
     /// </summary>
-    int day = 0;
+    int day = 1;
+
+    public int MaxHP => maxhp;
 
     /// <summary>
     /// HP 프로퍼티
@@ -86,11 +88,11 @@ public class UI : MonoBehaviour
             {
                 if (SceneManager.GetActiveScene().name == "main")
                 {
-                    nextDayButton.gameObject.SetActive(false);
+                    nextDayButton.gameObject.SetActive(true);
                 }
                 else
                 {
-                    nextDayButton.gameObject.SetActive(true);
+                    nextDayButton.gameObject.SetActive(false);
                 }
             }
         }
@@ -140,7 +142,7 @@ public class UI : MonoBehaviour
             {
                 day = value;
 
-                dayText.text = $"{day}";                                
+                dayText.text = $"{day}";
             }
         }
     }
@@ -177,9 +179,7 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
-        Gold = 10000;
-        Fame = 0;
-        Day++;
+
     }
 
     /// <summary>
@@ -222,5 +222,7 @@ public class UI : MonoBehaviour
 
         nextDayText.gameObject.SetActive(false);
         nextDayImage.gameObject.SetActive(false);
+
+        GameManager.Inst.GameSave();
     }
 }

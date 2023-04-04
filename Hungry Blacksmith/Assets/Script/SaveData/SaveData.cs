@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SaveData : MonoBehaviour
+public class SaveData
 {
-    public SaveData(int _day, int _gold, int _fame)
-    {
-        day = _day;
-        gold = _gold;
-        fame = _fame;
-    }
-
     public int day;
     public int gold;
     public int fame;
+    public int hp;
+
+    public int[] weapons = { 0, 0, 0 };
+    public int[] item = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        
 }

@@ -25,8 +25,8 @@ public class mainScenebutton : MonoBehaviour
     {
         if ((GameManager.Inst.UI.HP - hpDown) > -1)
         {
+            //GameManager.Inst.UI.HP -= hpDown;
             SceneManager.LoadScene(loadScene);
-            GameManager.Inst.UI.HP -= hpDown;
             Debug.Log($"HP가{hpDown}만큼 감소되었습니다.  현재 HP:{GameManager.Inst.UI.HP}");
             if (SceneManager.GetActiveScene().name == "main")
             {

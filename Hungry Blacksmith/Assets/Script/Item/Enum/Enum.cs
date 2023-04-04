@@ -27,3 +27,12 @@ public enum ItemEnum
     Diamond,
     NULL
 }
+
+public enum ScenEnum
+{
+    Main = 0,
+    Store,
+    Blacksmithshop,
+    Blackmarket,
+    Title
+}

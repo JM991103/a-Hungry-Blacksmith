@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
-    int enganceRange = 0;       // 강화 수치
+    public int enganceRange = 0;       // 강화 수치
     Image weaponImage;
 
 
@@ -29,12 +29,20 @@ public class Weapon : MonoBehaviour
         {
             if (enganceRange != value)
             {
-                if (model.WeaponDatas.Length > enganceRange)
+                if (model != null)
                 {
-                    enganceRange = value;
-                    gameObject.name = $"{WeaponModel.name}";
-                    if (weaponImage != null)
-                        weaponImage.sprite = WeaponModel.itemIcon;
+                    if (model.WeaponDatas.Length > enganceRange)
+                    {
+                        enganceRange = value;
+                        gameObject.name = $"{WeaponModel.name}";
+                        if (weaponImage != null)
+                            weaponImage.sprite = WeaponModel.itemIcon;
+                    }
+                }
+                else
+                {
+                    model = GameManager.Inst.WeaponManager.weaponItems[0];
+                    EnganceRange = value;
                 }
             }
         }
@@ -47,9 +55,24 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        model = GameManager.Inst.WeaponManager.weaponItems[0];
+        GameManager gameManager = GameManager.Inst;
 
-        Rest();
+        model = gameManager.WeaponManager.weaponItems[0];
+
+        bool result = true;
+        for (int i = 0; i < gameManager.Weapons.Length; i++)
+        {
+            if (gameManager.Weapons[i].EnganceRange > 0)
+            {
+                result = false;
+                break;
+            }
+        }
+
+        if (result)
+        {
+            Rest();
+        }
 
     }
 
@@ -147,7 +170,7 @@ public class Weapon : MonoBehaviour
                 }
             }
 
-            if(result)
+            if (result)
             {
                 // 모든 재료가 있다면 해당 재료를 인벤토리에서 감소
                 for (int i = 0; i < index; i++)
