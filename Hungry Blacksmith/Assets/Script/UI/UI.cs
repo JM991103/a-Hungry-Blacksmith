@@ -45,6 +45,7 @@ public class UI : MonoBehaviour
     /// </summary>
     TextMeshProUGUI nextDayText;
 
+    StoreItemPanel store;
 
     /// <summary>
     /// 최대 체력
@@ -69,7 +70,7 @@ public class UI : MonoBehaviour
     /// <summary>
     /// 플레이한 날짜
     /// </summary>
-    int day = 1;
+    int day = 0;
 
     /// <summary>
     /// HP 프로퍼티
@@ -125,6 +126,8 @@ public class UI : MonoBehaviour
         }
     }
 
+    public int storBeforDay = 0;
+
     /// <summary>
     /// 날짜 프로퍼티
     /// </summary>
@@ -136,7 +139,8 @@ public class UI : MonoBehaviour
             if (day != value)
             {
                 day = value;
-                dayText.text = $"{day}";
+
+                dayText.text = $"{day}";                                
             }
         }
     }
@@ -154,7 +158,7 @@ public class UI : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(transform.parent);        
+        DontDestroyOnLoad(transform.parent);
 
         hpText = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
         goldText = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -169,11 +173,13 @@ public class UI : MonoBehaviour
         nextDayImage.gameObject.SetActive(false);
         nextDayText = nextDayImage.GetComponentInChildren<TextMeshProUGUI>();
         nextDayText.gameObject.SetActive(false);
-    }
+            }
+
     private void Start()
     {
         Gold = 10000;
         Fame = 0;
+        Day++;
     }
 
     /// <summary>

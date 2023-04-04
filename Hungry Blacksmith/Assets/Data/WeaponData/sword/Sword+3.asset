@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: "\uAC80 +3"
   itemPrefab: {fileID: 0}
   itemIcon: {fileID: 21300000, guid: 284ccb4a824218d4486b5dddebc5f617, type: 3}
-  saleValue: 0
+  saleValue: 100000
   fameValue: 0
   costMoneyValue: 0
   costData:

@@ -69,7 +69,7 @@ public class WeaponSalePanel : MonoBehaviour
             {
                 storeWeaponSlot[i].WeaponImage.sprite = GameManager.Inst.Weapons[i].WeaponModel.itemIcon;
                 storeWeaponSlot[i].WeaponName.text = GameManager.Inst.Weapons[i].WeaponModel.itemName;
-                storeWeaponSlot[i].WeaponPrice.text = GameManager.Inst.Weapons[i].WeaponModel.saleValue.ToString() + "G";
+                storeWeaponSlot[i].WeaponPrice.text = GameManager.Inst.Weapons[i].WeaponModel.saleValue.ToString("#,0") + "G";
 
                 storeWeaponSlot[i].onSelectWeapon = null;
                 storeWeaponSlot[i].onSelectWeapon += OnSelectWeapon;
@@ -141,7 +141,7 @@ public class WeaponSalePanel : MonoBehaviour
             WeaponSaleSuccess();
             storeWeaponSlot[selectSlot].WeaponImage.sprite = GameManager.Inst.Weapons[0].WeaponModel.itemIcon;
             storeWeaponSlot[selectSlot].WeaponName.text = GameManager.Inst.Weapons[0].WeaponModel.itemName;
-            storeWeaponSlot[selectSlot].WeaponPrice.text = GameManager.Inst.Weapons[0].WeaponModel.saleValue.ToString() + "G";
+            storeWeaponSlot[selectSlot].WeaponPrice.text = GameManager.Inst.Weapons[0].WeaponModel.saleValue.ToString("#,0") + "G";
         }
         else
         {
