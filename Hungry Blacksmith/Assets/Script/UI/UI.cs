@@ -47,6 +47,8 @@ public class UI : MonoBehaviour
 
     StoreItemPanel store;
 
+    Button blackMarketButton;
+
     /// <summary>
     /// 최대 체력
     /// </summary>
@@ -71,6 +73,8 @@ public class UI : MonoBehaviour
     /// 플레이한 날짜
     /// </summary>
     int day = 1;
+
+    public bool blackMarket = false;
 
     public int MaxHP => maxhp;
 
@@ -143,6 +147,11 @@ public class UI : MonoBehaviour
                 day = value;
 
                 dayText.text = $"{day}";
+
+                if (day % 5 == 0)
+                {
+                    blackMarket = true;
+                }
             }
         }
     }
@@ -175,7 +184,9 @@ public class UI : MonoBehaviour
         nextDayImage.gameObject.SetActive(false);
         nextDayText = nextDayImage.GetComponentInChildren<TextMeshProUGUI>();
         nextDayText.gameObject.SetActive(false);
-            }
+
+        
+    }
 
     private void Start()
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,20 +22,52 @@ public class mainScenebutton : MonoBehaviour
         mainSceneText = mainSceneButton.GetComponentInChildren<TextMeshProUGUI>();
     }
 
+    private void Start()
+    {
+        if (gameObject.name == "black market")
+        {
+            mainSceneText.gameObject.SetActive(UI.Instance.blackMarket);
+        }
+    }
+
     void ChangeButton()
     {
         if ((GameManager.Inst.UI.HP - hpDown) > -1)
         {
-            //GameManager.Inst.UI.HP -= hpDown;
-            SceneManager.LoadScene(loadScene);
-            Debug.Log($"HP가{hpDown}만큼 감소되었습니다.  현재 HP:{GameManager.Inst.UI.HP}");
-            if (SceneManager.GetActiveScene().name == "main")
+            if (loadScene == "black market")
             {
-                GameManager.Inst.UI.DayTextParent.gameObject.SetActive(false);
+                if (UI.Instance.blackMarket)
+                {
+                    SceneManager.LoadScene(loadScene);
+                    Debug.Log($"HP가{hpDown}만큼 감소되었습니다.  현재 HP:{GameManager.Inst.UI.HP}");
+                    if (SceneManager.GetActiveScene().name == "main")
+                    {
+                        GameManager.Inst.UI.DayTextParent.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        GameManager.Inst.UI.DayTextParent.gameObject.SetActive(true);
+                    }
+
+                    UI.Instance.blackMarket = false;
+                }
+                else
+                {
+                    Debug.Log("암시장 입장 불가능");                    
+                }
             }
             else
             {
-                GameManager.Inst.UI.DayTextParent.gameObject.SetActive(true);
+                SceneManager.LoadScene(loadScene);
+                Debug.Log($"HP가{hpDown}만큼 감소되었습니다.  현재 HP:{GameManager.Inst.UI.HP}");
+                if (SceneManager.GetActiveScene().name == "main")
+                {
+                    GameManager.Inst.UI.DayTextParent.gameObject.SetActive(false);
+                }
+                else
+                {
+                    GameManager.Inst.UI.DayTextParent.gameObject.SetActive(true);
+                }
             }
         }
     }
