@@ -22,6 +22,8 @@ public class BlackMarketWeaponSaleWindow : MonoBehaviour
     Button exitButton;
     Button saleButton;
 
+    Dialogue dialogue;
+
     public System.Action<string> onWeaponSaleWindowPopUP;
     public System.Action onSaleWeapon;
 
@@ -48,6 +50,8 @@ public class BlackMarketWeaponSaleWindow : MonoBehaviour
         saleButton = transform.GetChild(4).GetComponent<Button>();
         saleButton.onClick.AddListener(WeaponSale);
         saleButton.interactable = false;
+
+        dialogue = FindObjectOfType<Dialogue>();
     }
 
     private void Start()
@@ -134,11 +138,13 @@ public class BlackMarketWeaponSaleWindow : MonoBehaviour
             gameManager.BlackMarketSaleWeapon(selectIndex, shop.WeaponSaleRatio);
             text = "무기를 판매하여 명성치가 감소 됩니다.";
             onSaleWeapon?.Invoke();
+            dialogue.NextDialogue(5);
             Close();
         }
         else
         {
-            text = "해당 무기는 판매할 수 없습니다.";
+            text = "판매 가능한 무기가 없습니다.";
+            dialogue.NextDialogue(6);
         }
 
         onWeaponSaleWindowPopUP?.Invoke(text);

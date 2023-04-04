@@ -45,7 +45,7 @@ public class BlackMarket : MonoBehaviour
         {
             isSaleWeapon = true;
         };
-        saleButton = transform.GetChild(2).GetComponent<Button>();
+        saleButton = transform.GetChild(1).GetComponent<Button>();
         saleButton.onClick.AddListener(() =>
         {
             if (!isSaleWeapon)

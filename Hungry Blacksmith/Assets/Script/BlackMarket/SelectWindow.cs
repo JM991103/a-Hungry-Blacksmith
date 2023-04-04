@@ -25,6 +25,8 @@ public class SelectWindow : MonoBehaviour
 
     TMP_InputField inputField;
 
+    Dialogue dialogue;
+
     public Action<string> purchasefail;
 
     int itemCount;
@@ -64,7 +66,9 @@ public class SelectWindow : MonoBehaviour
         inputField = GetComponentInChildren<TMP_InputField>();
         inputField.onValueChanged.AddListener(InputFieldValueChange);
 
-        
+        dialogue = FindObjectOfType<Dialogue>();
+
+
     }
 
 
@@ -142,12 +146,15 @@ public class SelectWindow : MonoBehaviour
             selectslot.BuyCount += ItemCount;
             ui.Gold -= buyGold;
             Inventory.Inst.AddItem(ItemCount, selectslot.itemEnum);
+            dialogue.NextDialogue(3);
+
             Close();
         }
         else
         {
             text = "골드가 부족합니다.";
             purchasefail?.Invoke(text);
+            dialogue.NextDialogue(2);
         }
     }
 }

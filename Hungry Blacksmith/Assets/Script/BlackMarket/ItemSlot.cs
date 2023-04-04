@@ -11,6 +11,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     Image icon;
     TextMeshProUGUI nameText;
     TextMeshProUGUI goldText;
+    Dialogue dialogue;
 
     const int MaxItemCount = 100;
 
@@ -46,6 +47,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         nameText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         goldText = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         icon = transform.GetChild(2).GetComponent<Image>();
+        dialogue = FindObjectOfType<Dialogue>();
     }
 
     /// <summary>
@@ -76,7 +78,12 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     {
         if (!isSold)
         {
-            onSlotClick?.Invoke(this); 
+            onSlotClick?.Invoke(this);
+            dialogue.NextDialogue(1);
+        }
+        else
+        {
+            dialogue.NextDialogue(4);
         }
     }
 }

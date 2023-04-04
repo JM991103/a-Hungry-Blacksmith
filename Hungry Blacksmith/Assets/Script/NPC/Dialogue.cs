@@ -47,20 +47,20 @@ public class Dialogue : MonoBehaviour
         ShowOnOff(false);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (count < dialogueTexts.Length)
-            {
-                NextDialogue(count);
-                count++;
-            }
-            else
-            {
-                ShowOnOff(false);
-            }
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        if (count < dialogueTexts.Length)
+    //        {
+    //            NextDialogue(count);
+    //            count++;
+    //        }
+    //        else
+    //        {
+    //            ShowOnOff(false);
+    //        }
+    //    }
+    //}
 
 }
