@@ -82,7 +82,7 @@ public class BlackMarket : MonoBehaviour
 
 
     /// <summary>
-    /// 파업창 열기
+    /// 팝업창 열기
     /// </summary>
     /// <param name="text"></param>
     void PopUpWindowOpen(string text)
@@ -93,7 +93,7 @@ public class BlackMarket : MonoBehaviour
     }
 
     /// <summary>
-    /// 파업창 닫기
+    /// 팝업창 닫기
     /// </summary>
     void PopUpWindowClose()
     {

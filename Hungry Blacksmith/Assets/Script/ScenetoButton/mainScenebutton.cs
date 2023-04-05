@@ -29,9 +29,15 @@ public class mainScenebutton : MonoBehaviour
     {
         if (gameObject.name == "black market")
         {
+            
             mainSceneText.gameObject.SetActive(UI.Instance.blackMarket);
+            
+            UI.Instance.onBlackMarket = (x) => mainSceneText.gameObject.SetActive(x);
+
+
         }
     }
+
 
     void ChangeButton()
     {
@@ -53,6 +59,7 @@ public class mainScenebutton : MonoBehaviour
                     }
 
                     UI.Instance.blackMarket = false;
+                    mainSceneText.gameObject.SetActive(false);
                 }
                 else
                 {

@@ -35,5 +35,7 @@ public class GameLoadButton : MonoBehaviour
         GameManager.Inst.GameLoad();
 
         SceneManager.LoadScene("main");
+
+        UI.Instance.UISetActive(true);
     }
 }
