@@ -15,11 +15,14 @@ public class mainScenebutton : MonoBehaviour
     Button mainSceneButton;
     TextMeshProUGUI mainSceneText;
 
+    MainPopupWindow mainPopupWindow;
+
     private void Awake()
     {
         mainSceneButton = GetComponent<Button>();
         mainSceneButton.onClick.AddListener(ChangeButton);
         mainSceneText = mainSceneButton.GetComponentInChildren<TextMeshProUGUI>();
+        mainPopupWindow = FindObjectOfType<MainPopupWindow>();
     }
 
     private void Start()
@@ -68,6 +71,15 @@ public class mainScenebutton : MonoBehaviour
                 {
                     GameManager.Inst.UI.DayTextParent.gameObject.SetActive(true);
                 }
+            }
+        }
+        else if(gameObject.name == "Store")
+        {
+            if(mainPopupWindow != null)
+            {
+                string text = "체력이 부족하여 이동할 수 없습니다.\r\n 휴식을 취하세요";
+
+                mainPopupWindow.Open(text);
             }
         }
     }

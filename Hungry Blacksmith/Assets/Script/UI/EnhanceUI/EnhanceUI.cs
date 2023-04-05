@@ -129,7 +129,7 @@ public class EnhanceUI : MonoBehaviour
 
         if (selectSlot != null && ui.HP > 0)
         {
-            selectSlot.weapon.Enhance();        // 지금은 누르면 바로 강화 추후 상의 후 결정
+            selectSlot.weapon.Enhance();        
 
             GameManager gameManager = GameManager.Inst;
 
@@ -139,6 +139,11 @@ public class EnhanceUI : MonoBehaviour
             }
 
             ui.HP--;
+        }
+        else if(ui.HP == 0)
+        {
+            PopUpWindowOpen();
+            popUpText.text = $"체력이 부족합니다.\r\n휴식을 취하세요!";
         }
     }
 
