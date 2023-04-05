@@ -133,7 +133,7 @@ public class UI : MonoBehaviour
     }
 
     public int storBeforDay = 0;
-
+    public Action<bool> onBlackMarket;
     /// <summary>
     /// 날짜 프로퍼티
     /// </summary>
@@ -150,7 +150,12 @@ public class UI : MonoBehaviour
 
                 if (day % 5 == 0)
                 {
+                    onBlackMarket?.Invoke(true);
                     blackMarket = true;
+                }
+                else
+                {
+                    onBlackMarket?.Invoke(false);
                 }
             }
         }
@@ -190,7 +195,7 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
-
+        UISetActive(false);
     }
 
     /// <summary>
@@ -235,5 +240,10 @@ public class UI : MonoBehaviour
         nextDayImage.gameObject.SetActive(false);
 
         GameManager.Inst.GameSave();
+    }
+
+    public void UISetActive(bool flag)
+    {
+        transform.gameObject.SetActive(flag);
     }
 }
