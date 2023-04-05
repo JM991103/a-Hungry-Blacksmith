@@ -41,7 +41,6 @@ public class GameManager : Singleton<GameManager>
                         ui.HP -= 2;
                         break;
                     case ScenEnum.Title:
-                        ui.HP -= 0;
                         break;
                     default:
                         break;
@@ -64,8 +63,6 @@ public class GameManager : Singleton<GameManager>
             obj.AddComponent<Weapon>();
             weapons[i] = obj.GetComponent<Weapon>();
         }
-
-        GameLoad();             // 게임 로드
     }
 
     public void WeaponSave(Weapon waepon, int count)
