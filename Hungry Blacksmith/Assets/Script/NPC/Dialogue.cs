@@ -17,13 +17,13 @@ public class Dialogue : MonoBehaviour
 
     TextMeshProUGUI text;
 
-    int count = 0;
+    //int count = 0;
 
     public void ShowDialogue()
     {
         ShowOnOff(true);
 
-        count = 0;
+        //count = 0;
     }
 
     public void ShowOnOff(bool flag)
