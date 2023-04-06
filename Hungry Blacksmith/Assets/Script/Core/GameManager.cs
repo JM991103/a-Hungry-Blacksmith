@@ -106,7 +106,7 @@ public class GameManager : Singleton<GameManager>
             ui.Gold += Mathf.FloorToInt(weapons[index].WeaponModel.saleValue * ratio);
 
             // 판매시 명성치 증가
-            ui.Fame -= 2000;
+            ui.Fame -= (int)(weapons[index].WeaponModel.fameValue * 0.7f);
 
             // 판매시 해당 무기 강화수치 0으로 만들기
             weapons[index].EnganceRange = 0;
@@ -180,7 +180,7 @@ public class GameManager : Singleton<GameManager>
         {
             // 폴더나 파일이 없으면 초기값으로 변경
             ui.Day = 1;
-            ui.Gold = 10000;
+            ui.Gold = 1000;
             ui.Fame = 0;
             ui.HP = ui.MaxHP;
 

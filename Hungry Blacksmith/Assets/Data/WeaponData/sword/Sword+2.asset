@@ -13,21 +13,19 @@ MonoBehaviour:
   m_Name: Sword+2
   m_EditorClassIdentifier: 
   itemID: 2
-  itemName: "\uAC80 +2"
+  itemName: "\uB300\uB828\uC6A9 \uBAA9\uAC80 +2"
   itemPrefab: {fileID: 0}
-  itemIcon: {fileID: 21300000, guid: 284ccb4a824218d4486b5dddebc5f617, type: 3}
-  saleValue: 10000
-  fameValue: 0
+  itemIcon: {fileID: 21300000, guid: 62eedc75764adcc46bb6e4bbf7a06664, type: 3}
+  saleValue: 1000
+  fameValue: 6
   costMoneyValue: 0
   costData:
   - costItem: 0
-    costItemValue: 20
+    costItemValue: 30
   - costItem: 1
-    costItemValue: 50
-  - costItem: 2
     costItemValue: 10
-  enforceRatio: 0.7
-  destroy: 0.1
+  enforceRatio: 0.85
+  destroy: 0
   changeWeaponData:
   - {fileID: 0}
   - {fileID: 0}
