@@ -116,6 +116,8 @@ public class Weapon : MonoBehaviour
                         Debug.Log($"최하 단계이므로 하락 하지않습니다. : {enganceRange}");
                     }
                 }
+
+                UI.Instance.HP--;
             }
         }
         else

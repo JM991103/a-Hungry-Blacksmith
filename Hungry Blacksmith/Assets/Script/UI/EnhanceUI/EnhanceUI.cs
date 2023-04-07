@@ -137,8 +137,6 @@ public class EnhanceUI : MonoBehaviour
             {
                 gameManager.WeaponSave(slots[i].weapon, i);
             }
-
-            ui.HP--;
         }
         else if(ui.HP == 0)
         {

@@ -63,7 +63,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         icon.sprite = inven.itemData[(int)code].itemIcon;
         nameText.text = inven.itemData[(int)code].itemName;
         goldValue = (int)(inven.itemData[(int)code].buyValue * ratio);
-        goldText.text = $"{goldValue} g";        // 원가 가격에 ratio만큼 할인 된 가격
+        goldText.text = $"{goldValue : #,0} G";        // 원가 가격에 ratio만큼 할인 된 가격
     }
 
     void Sold()
