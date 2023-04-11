@@ -123,7 +123,7 @@ public class GameManager : Singleton<GameManager>
 
 
         Inventory inven = Inventory.Inst;
-        string path = $"{Application.dataPath}/Save/";
+        string path = $"{Application.persistentDataPath}/Save/";
 
         // 무기 저장
         for (int i = 0; i < saveData.weapons.Length; i++)
@@ -152,7 +152,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GameLoad()
     {
-        string path = $"{Application.dataPath}/Save/";
+        string path = $"{Application.persistentDataPath}/Save/";
         string fullPath = $"{path}data.json";
         Inventory inven = Inventory.Inst;
 

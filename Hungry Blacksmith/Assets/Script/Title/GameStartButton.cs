@@ -18,7 +18,7 @@ public class GameStartButton : MonoBehaviour
 
     void GameStart()
     {
-        string path = $"{Application.dataPath}/Save/";
+        string path = $"{Application.persistentDataPath}/Save/";
         string pullPath = $"{path}data.json";
 
         if (Directory.Exists(path) && File.Exists(pullPath))
