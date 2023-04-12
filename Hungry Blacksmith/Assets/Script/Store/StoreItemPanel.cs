@@ -109,7 +109,7 @@ public class StoreItemPanel : MonoBehaviour
         for (int i = 0; i < Inventory.Inst.itemData.Length; i++)
         {
             itemSlots[i].ItemName.text = Inventory.Inst.itemData[i].itemName;
-            itemSlots[i].ItemPrice.text = Inventory.Inst.itemData[i].buyValue.ToString("#,0") + "G";
+            itemSlots[i].ItemPrice.text = Inventory.Inst.itemData[i].buyValue.ToString("#,0") + " G";
             
         }
 
@@ -129,7 +129,7 @@ public class StoreItemPanel : MonoBehaviour
             {
                 selectIndex = i;
                 selectSlotItemName.text = Inventory.Inst.itemData[i].itemName;
-                selectSlotItemPrice.text = Inventory.Inst.itemData[i].buyValue.ToString("#,0") + "G";
+                selectSlotItemPrice.text = Inventory.Inst.itemData[i].buyValue.ToString("#,0") + " G";
                 selectSlotItemIcon.sprite = Inventory.Inst.itemData[i].itemIcon;
             }
         }
@@ -256,7 +256,7 @@ public class StoreItemPanel : MonoBehaviour
         //소지한 아이템 수 9999999
         possessionitem.text = $"소지한 아이템 수 {Inventory.Inst.inventory[selectIndex].itemCount}";
         //총 999999G 입니다.
-        itemPriceText.text = $"총 {(int)selectSlotSlider.value * Inventory.Inst.itemData[selectIndex].buyValue :#,0}G 입니다.";
+        itemPriceText.text = $"총 {(int)selectSlotSlider.value * Inventory.Inst.itemData[selectIndex].buyValue :#,0} G 입니다.";
 
     }
 
@@ -269,7 +269,7 @@ public class StoreItemPanel : MonoBehaviour
         //소지한 아이템 수 9999999
         possessionitem.text = $"소지한 아이템 수 {Inventory.Inst.inventory[selectIndex].itemCount}";
         //총 999999G 입니다.
-        itemPriceText.text = $"총 {(int)selectSlotSlider.value * Inventory.Inst.itemData[selectIndex].SaleValue :#,0}G 입니다.";
+        itemPriceText.text = $"총 {(int)selectSlotSlider.value * Inventory.Inst.itemData[selectIndex].SaleValue :#,0} G 입니다.";
                 
     }
 }

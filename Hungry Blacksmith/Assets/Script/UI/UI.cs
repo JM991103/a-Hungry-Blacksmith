@@ -111,7 +111,7 @@ public class UI : MonoBehaviour
         set
         {
             gold = value;
-            goldText.text = $"{gold}G";
+            goldText.text = $"{gold :#,0} G";
 
         }
     }
@@ -127,7 +127,7 @@ public class UI : MonoBehaviour
             if (fame != value)
             {
                 fame = value;
-                fameText.text = $"{fame}";
+                fameText.text = $"{fame :#,0}";
             }
         }
     }
@@ -156,6 +156,7 @@ public class UI : MonoBehaviour
                 else
                 {
                     onBlackMarket?.Invoke(false);
+                    blackMarket = false;
                 }
             }
         }
