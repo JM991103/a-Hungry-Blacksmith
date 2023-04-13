@@ -34,7 +34,7 @@ public class InventoryUI : MonoBehaviour
         {
             slot = transform.GetChild(1).GetChild(i);
             slot.GetChild(0).GetComponent<TextMeshProUGUI>().text = $"{inven.itemData[i].itemName}";
-            slot.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"{inven.inventory[i].itemCount} 개";
+            slot.GetChild(1).GetComponent<TextMeshProUGUI>().text = $"{inven.inventory[i].itemCount : #,0} 개";
             slot.GetChild(2).GetComponent<Image>().sprite = inven.itemData[i].itemIcon;
         }
 
