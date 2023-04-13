@@ -6853,6 +6853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce12ef427a5a0a24c92f82ba427d75b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invenButon: {fileID: 430341189}
   blackMarket: 0
   storBeforDay: 0
 --- !u!1 &550014861397795281

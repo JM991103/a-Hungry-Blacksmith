@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,8 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour
 {
     public static UI Instance;
+
+    public Button invenButon;
 
     /// <summary>
     /// UI에 표시되는 HP 텍스트
@@ -217,6 +220,7 @@ public class UI : MonoBehaviour
     /// <returns></returns>
     IEnumerator FadeInOut()
     {
+        invenButon.gameObject.SetActive(false);
         for (float i = 0.0f; i <= 1.0f;)
         {
             i += 0.2f;
@@ -239,7 +243,7 @@ public class UI : MonoBehaviour
 
         nextDayText.gameObject.SetActive(false);
         nextDayImage.gameObject.SetActive(false);
-
+        invenButon.gameObject.SetActive(true);
         GameManager.Inst.GameSave();
     }
 
