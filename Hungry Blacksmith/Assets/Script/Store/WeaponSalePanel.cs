@@ -139,9 +139,9 @@ public class WeaponSalePanel : MonoBehaviour
         {
             GameManager.Inst.SaleWeapon(selectSlot);
             WeaponSaleSuccess();
-            storeWeaponSlot[selectSlot].WeaponImage.sprite = GameManager.Inst.Weapons[0].WeaponModel.itemIcon;
-            storeWeaponSlot[selectSlot].WeaponName.text = GameManager.Inst.Weapons[0].WeaponModel.itemName;
-            storeWeaponSlot[selectSlot].WeaponPrice.text = GameManager.Inst.Weapons[0].WeaponModel.saleValue.ToString("#,0") + "G";
+            storeWeaponSlot[selectSlot].WeaponImage.sprite = GameManager.Inst.WeaponManager.weaponItems[0].WeaponDatas[0].itemIcon;
+            storeWeaponSlot[selectSlot].WeaponName.text = GameManager.Inst.WeaponManager.weaponItems[0].WeaponDatas[0].itemName;
+            storeWeaponSlot[selectSlot].WeaponPrice.text = GameManager.Inst.WeaponManager.weaponItems[0].WeaponDatas[0].saleValue.ToString("#,0") + " G";
         }
         else
         {
