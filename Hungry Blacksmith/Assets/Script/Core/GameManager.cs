@@ -30,6 +30,7 @@ public class GameManager : Singleton<GameManager>
                 {
                     case ScenEnum.Main:
                         ui.HP -= 0;
+                        gameStart?.Invoke();
                         break;
                     case ScenEnum.Store:
                         ui.HP -= 1;
@@ -48,6 +49,8 @@ public class GameManager : Singleton<GameManager>
             }
         }
     }
+
+    public Action gameStart;
 
     protected override void Initialize()
     {
@@ -153,6 +156,7 @@ public class GameManager : Singleton<GameManager>
     public void GameLoad()
     {
         string path = $"{Application.persistentDataPath}/Save/";
+
         string fullPath = $"{path}data.json";
         Inventory inven = Inventory.Inst;
 
